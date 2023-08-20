@@ -1,22 +1,18 @@
 <!-- we have created this tmplate directory..also in this diredtory we need to create  a folder with the same name as our app name in this case it is base -->
 
-
-
-
-{% extends 'main.html' %} 
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 
 <h1>home template</h1>
 
 <div>
+  <div>
+    {% for room in rooms %}
     <div>
-        {% for room in rooms %}
-        <div>
-            <h2>{{room.id}}----{{room.name}}</h2>
-        </div>
-        {% endfor %}
+        <!-- this below till dynamically route to differernt room ids -->
+      <h2>{{room.id}}----<a href="/room/{{room.id}}"> {{room.name}}</a></h2>        
     </div>
-
+    {% endfor %}
+  </div>
 </div>
-    
+
 {% endblock %}
