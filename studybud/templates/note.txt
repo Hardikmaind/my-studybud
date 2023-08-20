@@ -1,0 +1,1 @@
+we need to let djnago know about this tempalte folder...go into the settings.py and add it there
