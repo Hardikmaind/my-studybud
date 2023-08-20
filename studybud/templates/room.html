@@ -1,4 +1,8 @@
 
-    {%include 'navbar.html'%}       <!-- this is how we include a template. this is template inheritence --> 
-    <h1>room template</h1>
+{% extends 'main.html' %} 
+{% block content %}
+<h1>room template</h1>
+
+
     
+{% endblock %}
