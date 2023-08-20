@@ -14,4 +14,10 @@ def home(request):
     context={'rooms':rooms} #this is a context dictionary
     return render(request,'base/home.html',context)
 def room(request,pk):           #pk parameter is for dynamic routing
-    return render(request,'base/room.html') #now since this file is in the base folder in template, we need to add base/room.html. we dont need to add the template folder as django knows that it is in the template folder automatically.
+    room=None
+    for i in rooms:
+        if i['id']==int(pk):
+            room=i
+
+    context={'room':room}
+    return render(request,'base/room.html',context) #now since this file is in the base folder in template, we need to add base/room.html. we dont need to add the template folder as django knows that it is in the template folder automatically.
