@@ -1,0 +1,3 @@
+# views maddhe thevnar apan functions
+#urls madhe thevnar apan paths
+#template madhe apan thevnar html files i.e templates

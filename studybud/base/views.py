@@ -12,11 +12,11 @@ rooms=[
 
 def home(request):
     context={'rooms':rooms} #this is a context dictionary
-    return render(request,'base/home.html',context)
+    return render(request,'base/home.html',context)             #base/home.html is the path to the home.html file. we dont need to add the template folder as django knows that it is in the template folder automatically. 
 def room(request,pk):           #pk parameter is for dynamic routing
     room=None
     for i in rooms:
-        if i['id']==int(pk):
+        if i['id']==int(pk):        #pk is a string so we need to convert it into an integer. and then we are comparing it with the id of the room dictionary. in dictionary, the id is an integer. this is how we access the id of the dictionary
             room=i
 
     context={'room':room}
