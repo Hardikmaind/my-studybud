@@ -10,7 +10,7 @@ from django.contrib.auth.models import User     #here we are importing the user 
 # Room is gonna be tha child of a topic...  i wanna specify a class above it..that is gonna be the parent class of this class
 class Topic(models.Model):
     name=models.CharField(max_length=200)
-    def _str_(self):
+    def __str__(self):
         return self.name
         # now we wanna speciy the relation ship between the room and the topic...a topic can have multile rooms whereas a room can have only one topic
 
@@ -48,7 +48,7 @@ class Room(models.Model):
 
 
 
-    def _str_(self):          #created a string representation of our room
+    def __str__(self):          #created a string representation of our room
         return self.name
         # return str(self.name)       #here self has to be string ...if not then we have to type cast it
 
@@ -67,7 +67,7 @@ class Message(models.Model):
     updated=models.DateTimeField(auto_now=True) 
     created=models.DateTimeField(auto_now_add=True) 
      
-    def _str_(self):          #created a string representation of our room
+    def __str__(self):          #created a string representation of our room
         return self.body[0:50 ]  #here we are returning the first 50 characters of the body of the message
 
 
