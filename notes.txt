@@ -1,3 +1,4 @@
 # views maddhe thevnar apan functions
 #urls madhe thevnar apan paths
 #template madhe apan thevnar html files i.e templates
+# for access the admin panel we need the password of it.. we need to generate it by executing some commmands "python manage.py createsuperuser" then we have to enter the username,email and password...in this way the super user will be created

@@ -16,7 +16,7 @@ def home(request):
 def room(request,pk):           #pk parameter is for dynamic routing
     room=None
     for i in rooms:
-        if i['id']==int(pk):        #pk is a string so we need to convert it into an integer. and then we are comparing it with the id of the room dictionary. in dictionary, the id is an integer. this is how we access the id of the dictionary.  yaha int(pk) apan  url se compare kar rahe
+        if i['id']==int(pk):        #pk is a string so we need to convert it into an integer. and then we are comparing it with the id of the room dictionary. in dictionary, the id is an integer. this is how we access the id of the dictionary.  yaha int(pk) apan  url se compare kar rahecd
             room=i
 
     context={'room':room}
