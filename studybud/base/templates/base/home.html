@@ -1,37 +1,47 @@
 <!-- we have created this tmplate directory..also in this diredtory we need to create  a folder with the same name as our app name in this case it is base -->
 
-
-
-
-
-
-
 {% extends 'main.html' %} {% block content %}
 
-<h1>home template</h1>
 
-<div>
-  <a href="{% url 'create-room' %}">Create Room</a>
+<style>
+
+<div class="home-container">
   <div>
-    {% for room in rooms %}
+    <h3>Browse Topics</h3>
+    <hr/>
+  </div>
+
+  <div>
+    {% comment %}
+    <h1>home template</h1>
+    {% endcomment %}
+    <a href="{% url 'create-room' %}">Create Room</a>
     <div>
-      <!-- this below till dynamically route to differernt room -->
+      {% for room in rooms %}
+      <div>
+        <a href="{% url 'update-room' room.id %}">Edit room</a>
+        <a href="{% url 'delete-room' room.id %}">delete room</a>
+        <!-- this below till dynamically route to differernt room -->
 
-      <!-- Using Hard-Coded URL (<a href="/room/{{room.id}}">...</a>): -->
-      <!-- <h2>{{room.id}}----<a href="/room/{{room.id}}"> {{room.name}}</a></h2>         -->
+        <!-- Using Hard-Coded URL (<a href="/room/{{room.id}}">...</a>): -->
+        <!-- <h2>{{room.id}}----<a href="/room/{{room.id}}"> {{room.name}}</a></h2>         -->
 
-      <!-- Using Django URL Tag (<a href="{% url 'room' room.id %}">...</a>): -->
+        <!-- Using Django URL Tag (<a href="{% url 'room' room.id %}">...</a>): -->
 
         <!-- in single quote of the href there is name of the view ..which is room -->
 
-      <h2> 
-        <span>@{{room.host.username}}</span>   <!-- we can actually query upwards to the parent item,instead  of just attribute-->
-       <h5> {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>  </h5>  <!-- isse jiska name room ho woh url se associate kar dega...so whatever the url may be is several places in our code...we can just access it by the name  given to that url...and just have to write the name correctly-->
-       <small> {{room.topic.name}} </small>  <!-- whatever written in content dictionary we pass it like this-->
-       <hr>
-      </h2>
+        <span>@{{room.host.username}}</span>
+        <!-- we can actually query upwards to the parent item,instead  of just attribute-->
+        <h5>
+          {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>
+        </h5>
+        <!-- isse jiska name room ho woh url se associate kar dega...so whatever the url may be is several places in our code...we can just access it by the name  given to that url...and just have to write the name correctly-->
+        <small> {{room.topic.name}} </small>
+        <!-- whatever written in content dictionary we pass it like this-->
+        <hr />
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
 

@@ -45,9 +45,15 @@ class Room(models.Model):
 
     # When you call str(object) on an instance of your class, Python will look for the __str__ method in that class and use its return value as the string representation of the object.
 
+    # when i create a new room...all the room will be sorted by the time they were updaterd and created.because of this below meta class
+    class Meta:
+        # ordering=['updated','created']  
+            #its gonna order the room by the time they were updated and created in ascending order. if we want to order in descending order then we can do like this ordering=['-updated','-created']
+        ordering=['-updated','-created']    #in this the newest  updateed room object(row in table Room) will be first and the oldest will be last
 
 
 
+    # now when i create a new room object..i want to see the name of the room in the admin panel..so i have to create a string representation of the room object
     def __str__(self):          #created a string representation of our room
         return self.name
         # return str(self.name)       #here self has to be string ...if not then we have to type cast it
