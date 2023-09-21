@@ -12,4 +12,6 @@ urlpatterns = [
 
     # people pass it int into url. abov ei have passed the pk as a string
     #     path('room/<slug:pk>', views.room,name="room"), 
+
+    path('create-room/', views.createRoom,name="create-room")
 ]

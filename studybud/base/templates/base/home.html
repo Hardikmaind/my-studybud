@@ -11,6 +11,7 @@
 <h1>home template</h1>
 
 <div>
+  <a href="{% url 'create-room' %}">Create Room</a>
   <div>
     {% for room in rooms %}
     <div>
@@ -24,7 +25,10 @@
         <!-- in single quote of the href there is name of the view ..which is room -->
 
       <h2> 
-        {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>    <!-- isse jiska name room ho woh url se associate kar dega...so whatever the url may be is several places in our code...we can just access it by the name  given to that url...and just have to write the name correctly-->
+        <span>@{{room.host.username}}</span>   <!-- we can actually query upwards to the parent item,instead  of just attribute-->
+       <h5> {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>  </h5>  <!-- isse jiska name room ho woh url se associate kar dega...so whatever the url may be is several places in our code...we can just access it by the name  given to that url...and just have to write the name correctly-->
+       <small> {{room.topic.name}} </small>  <!-- whatever written in content dictionary we pass it like this-->
+       <hr>
       </h2>
     </div>
     {% endfor %}

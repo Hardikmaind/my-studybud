@@ -33,7 +33,7 @@ class Room(models.Model):
     # id= we can override  the id field by creating our own id field with 
 
 
-    # since topic is placed below Room in our CODE  we cann access it by putting like 'Topic'.(in quotes)..but if it would have been above  then we can aslo access it by putting just Topic
+    # since topic class is placed below Room class in our CODE  we cann access it by putting like 'Topic'.(in quotes)..but if it would have been above  then we can aslo access it by putting just Topic
     topic=models.ForeignKey(Topic,null=True ,on_delete=models.SET_NULL)       #this is a one to many relationship...and in bracket there is the model we are relating to. i.e parent model topic . incase topic is deleted then the room will be set to null, idont want to delete the room..i just want to set it to null. and if this value is set to null then we have to allow in the database that this value can be null. so we have to specify null=True
 
     
