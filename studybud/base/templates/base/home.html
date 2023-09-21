@@ -4,11 +4,24 @@
 
 
 <style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+  }
+</style>
 
 <div class="home-container">
   <div>
     <h3>Browse Topics</h3>
     <hr/>
+    {% for x in topics %}
+    <!-- this value taken in the parameter in query will ne used to fillter the topics in browse topic menu -->
+    <div> <a href="{% url 'home' %}?query={{x.name}}"> 
+      <!-- {{x.id}})       -->
+        {{x.name}}
+       </a> </div>
+    {% endfor %}
   </div>
 
   <div>
