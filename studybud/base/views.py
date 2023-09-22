@@ -13,6 +13,15 @@ from .models import Room ,Topic     #first we import the model that we want to q
 #     {'id':3,'name':'lets play guitar'},
 # ]
 
+
+# Q() is used to create complex queries. It allows you to use | (OR) and & (AND) operators to combine conditions
+# topic__name__icontains=q is a lookup expression. It means you're querying the Room model for objects where the related Topic's name contains (case-insensitive) the value of q.
+# name__icontains=q is querying the Room model for objects where the name field contains (case-insensitive) the value of q.
+# In simpler terms, this query is looking for rooms where either the related Topic's name contains the value of q or the room's own name field contains the value of q. The icontains is for case-insensitive matching.
+
+# The double underscores are used to navigate relationships between models and perform field lookups, as explained in the previous message.
+
+
 def home(request):
     # .object blow is the modal manager in django
     # this below works after quring db because by dafault we have ids genrated for them from 1
@@ -21,7 +30,12 @@ def home(request):
 
     #"result = x if condition else y"    this is the ternary condition in python
     q=request.GET.get('query') if request.GET.get('query')!=None  else '' #ye "query" home.html mein hai..wwhen clicked on the href link it will send the query to the url and then we will get the query here....we are getting the query from the url and storing it in a variable called q 
-    rooms=Room.objects.filter(topic__name__icontains=q)  #this is how we filter the object data from the database. "topic__name__icontains"  filters the ojects which contains "q" in them  ..in this  "i" denotes case-sensitive ness...if i removed the i ..means it is case insensitive
+    # now sometime we want to add the multiple parameter below..so to use "and" and "or" we need to import Q from django.db.models see above i have imported it. then i have to wrap the below in Q() and use the | and & operator..simple
+    # rooms=Room.objects.filter(topic__name__icontains=q)
+    rooms=Room.objects.filter(Q(topic__name__icontains=q) | Q (name__icontains=q))
+    
+    
+    #this is how we filter the object data from the database. "topic__name__icontains"  filters the ojects which contains "q" in them  ..in this  "i" denotes case-sensitive ness...if i removed the i ..means it is case insensitive
     # 
     topics=Topic.objects.all()  
     
