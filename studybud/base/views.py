@@ -36,15 +36,16 @@ def home(request):
     # ismein apan ne room modal mein topic ko liye..then topic mein query upward in hte parent kiye..i.w name in topic model then checked whether it contains the query or not.
     rooms=Room.objects.filter(Q(topic__name__icontains=q) | Q (name__icontains=q)|Q(description__icontains=q))
     
+    # in python we can get length of list by wrapping it inside len() .function  but .count(), is used to get the length of the query ...this is ,much faster
+    room_count=rooms.count()    #this will count the number of rooms in the database 
     
     #this is how we filter the object data from the database. "topic__name__icontains"  filters the ojects which contains "q" in them  ..in this  "i" denotes case-sensitive ness...if i removed the i ..means it is case insensitive
     # 
     topics=Topic.objects.all()  
     
     #    yaha se apan ne context dict home.html mein bhejo hain ...jaha home.html mein apan ne loops ki help se waha rendere kiya hain
-    context={'rooms':rooms,'topics':topics} #this is a context dictionary....now here the rooms will be from the database and not from the above rooms list.
+    context={'rooms':rooms,'topics':topics,'room_count':room_count} #this is a context dictionary....now here the rooms will be from the database and not from the above rooms list.
     return render(request,'base/home.html',context)             #base/home.html is the path to the home.html file. we dont need to add the template folder as django knows that it is in the template folder automatically. 
-
 
 
 # Primary Keys
