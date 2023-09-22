@@ -2,4 +2,9 @@
     <a href="/">
         <h1>logo</h1>
     </a>
+    <!-- when entererd query in the seach box...the actionw will trigger the view with the name="home" in this case that view is "def Home"...the method specfied is the GET method....and because of the name in the input tag...our entered query will go into the "home view" with "query" -->
+    <form method="GET" action="{% url 'home' %}">
+        <label for="search">Search</label>
+        <input type="text" name="query" placeholder="Search Rooms ..">
+    </form>
     <hr>    

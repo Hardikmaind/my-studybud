@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from django.db.models import Q
 from .forms import RoomForm 
 
 # Create your views here.
@@ -16,12 +16,16 @@ from .models import Room ,Topic     #first we import the model that we want to q
 def home(request):
     # .object blow is the modal manager in django
     # this below works after quring db because by dafault we have ids genrated for them from 1
-    rooms=Room.objects.all()    #this is how we query the database. we are getting all the objects from the Room model. we are storing it in a variable called rooms. this is a list of objects. we can iterate through this list and get the objects one by one.    
-    
-    
+
+    # rooms=Room.objects.all()    #this is how we query the database. we are getting all the objects from the Room model. we are storing it in a variable called rooms. this is a list of objects. we can iterate through this list and get the objects one by one.    
+
+    #"result = x if condition else y"    this is the ternary condition in python
+    q=request.GET.get('query') if request.GET.get('query')!=None  else '' #ye "query" home.html mein hai..wwhen clicked on the href link it will send the query to the url and then we will get the query here....we are getting the query from the url and storing it in a variable called q 
+    rooms=Room.objects.filter(topic__name__icontains=q)  #this is how we filter the object data from the database. "topic__name__icontains"  filters the ojects which contains "q" in them  ..in this  "i" denotes case-sensitive ness...if i removed the i ..means it is case insensitive
+    # 
     topics=Topic.objects.all()  
     
-               
+    #    yaha se apan ne context dict home.html mein bhejo hain ...jaha home.html mein apan ne loops ki help se waha rendere kiya hain
     context={'rooms':rooms,'topics':topics} #this is a context dictionary....now here the rooms will be from the database and not from the above rooms list.
     return render(request,'base/home.html',context)             #base/home.html is the path to the home.html file. we dont need to add the template folder as django knows that it is in the template folder automatically. 
 
