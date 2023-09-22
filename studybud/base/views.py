@@ -32,7 +32,9 @@ def home(request):
     q=request.GET.get('query') if request.GET.get('query')!=None  else '' #ye "query" home.html mein hai..wwhen clicked on the href link it will send the query to the url and then we will get the query here....we are getting the query from the url and storing it in a variable called q 
     # now sometime we want to add the multiple parameter below..so to use "and" and "or" we need to import Q from django.db.models see above i have imported it. then i have to wrap the below in Q() and use the | and & operator..simple
     # rooms=Room.objects.filter(topic__name__icontains=q)
-    rooms=Room.objects.filter(Q(topic__name__icontains=q) | Q (name__icontains=q))
+    
+    # ismein apan ne room modal mein topic ko liye..then topic mein query upward in hte parent kiye..i.w name in topic model then checked whether it contains the query or not.
+    rooms=Room.objects.filter(Q(topic__name__icontains=q) | Q (name__icontains=q)|Q(description__icontains=q))
     
     
     #this is how we filter the object data from the database. "topic__name__icontains"  filters the ojects which contains "q" in them  ..in this  "i" denotes case-sensitive ness...if i removed the i ..means it is case insensitive
