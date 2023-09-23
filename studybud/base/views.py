@@ -5,6 +5,7 @@ from .forms import RoomForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .models import Room ,Topic     #first we import the model that we want to query
 
 # Create your views here.
@@ -69,7 +70,21 @@ def room(request,pk):           #pk parameter is for dynamic routing
 
     context={'room':room}
     return render(request,'base/room.html',context) #now since this file is in the base folder in template, we need to add base/room.html. we dont need to add the template folder as django knows that it is in the template folder automatically.
- 
+
+
+
+
+
+
+
+
+# now i wanna restrict the user from accessing some pages based on the status of where the user is logged or logged out. for this we use mixins for classbased views and decorators for function based views. also middleware is used for this purpose
+
+# now i am gonna restrict the create page
+
+# @login_required() #this is a decorator..we just have to add this..but it will not work..we need to add the login_url parameter in it or this will throw an error "page not found 404"
+
+@login_required(login_url='login') #this is a decorator. this will check if the user is logged in or not. if the user is not logged in then it will redirect the user to the login page. we need to import login_required from django.contrib.auth.decorators 
 def createRoom(request):
     form=RoomForm()     #yaha pe form laya hai form.py se
     if request.method=='POST':
@@ -89,10 +104,11 @@ def createRoom(request):
 
 
 
-    # NOw we will do the crud operation ..for this lets create the views
+# NOw we will do the crud operation ..for this lets create the views
 
 
-    # we need to pass the request and pk parameter to the updateRoom function because we are gonna be updating the room with the id=pk
+# we need to pass the request and pk parameter to the updateRoom function because we are gonna be updating the room with the id=pk
+@login_required(login_url='login')
 def updateRoom(request,pk):
     room=Room.objects.get(id=pk)        #now we need to get this by unique value ..becaule if we have two value with same value like name,it gonna throw an erroe
     form=RoomForm(instance=room)        #here we are passing the instance of the room to the RoomForm() class in forms.py. the RoomForm() class will validate the data and return it to us. the form knows what fields to expect because we have defined it in the RoomForm() class in forms.py.
@@ -116,7 +132,7 @@ def updateRoom(request,pk):
 #     context={'object':room}
 #     return render(request,'base/delete.html',context) #yaha pe content se form pass kiya hai directly in room_form.html
 
-
+@login_required(login_url='login')
 def deleteRoom(request,pk):
     room=Room.objects.get(id=pk)
     form=RoomForm(request.POST)
@@ -162,7 +178,19 @@ def loginPage(request):
     context={}
     return render(request,'base/login_register.html',context)
 
+
+
+
 # here i have directly logoiut the user from the home page and havent created any logout template
+
+
+# In Django, the logout function requires the request object in order to log out the user associated with that specific request. The request object contains information about the current web request, including details about the user making the request. When you call logout(request), Django uses the information from the request object to identify which user is currently authenticated and logs them out.
+
+# In summary, the request object is necessary for the logout function to perform the logout action on the correct user.
+
+
 def logoutUser(request):
     logout(request)     #this willd delete the session of the user from the database and from the browser
     return redirect('home')
+
+
