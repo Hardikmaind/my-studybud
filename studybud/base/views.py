@@ -1,10 +1,14 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.db.models import Q
 from .forms import RoomForm 
-
-# Create your views here.
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
 from django.http.response import HttpResponse
 from .models import Room ,Topic     #first we import the model that we want to query
+
+# Create your views here.
+
 
 # now to call the home function, we need to import it into the urls.py file
 # rooms=[
@@ -32,6 +36,7 @@ def home(request):
     q=request.GET.get('query') if request.GET.get('query')!=None  else '' #ye "query" home.html mein hai..wwhen clicked on the href link it will send the query to the url and then we will get the query here....we are getting the query from the url and storing it in a variable called q 
     # now sometime we want to add the multiple parameter below..so to use "and" and "or" we need to import Q from django.db.models see above i have imported it. then i have to wrap the below in Q() and use the | and & operator..simple
     # rooms=Room.objects.filter(topic__name__icontains=q)
+    
     
     # ismein apan ne room modal mein topic ko liye..then topic mein query upward in hte parent kiye..i.w name in topic model then checked whether it contains the query or not.
     rooms=Room.objects.filter(Q(topic__name__icontains=q) | Q (name__icontains=q)|Q(description__icontains=q))
@@ -123,3 +128,41 @@ def deleteRoom(request,pk):
     
     # in this below way also can we return the form
     # return render(request=request,template_name='base/delete.html',context={'obj':room})
+
+#dont use login as a function name as it is a inbuilt function in django which we will be using
+def loginPage(request):
+    
+    if request.method=='POST':
+        userid=request.POST.get('username')
+        password=request.POST.get('password')
+        try:
+            # explainnation of the below line
+            
+#             User.objects is a manager for the User model. It provides an interface for querying the database and performing operations on the User model.
+
+# .get() is a method provided by the manager. It's used for retrieving a single object from the database that matches the specified conditions.
+
+# username=userid is specifying the condition for the query. It's saying, "Retrieve a user object where the username field is equal to the value stored in the variable userid."
+
+# So, in essence, this line is trying to retrieve a user from the database whose username matches the one provided in the userid variable. If such a user exists, it will be stored in the variable user. If not, it will raise an exception (which you've handled with a try and except block).
+            user=User.objects.get(username=userid)
+        except:     # if te user does not exist below block  ..this is how we handle the error in django
+            messages.error(request,'User does not exist')        #this is how i show message in django...we have writeen its statements in the main.html go see that
+        #if the user does exist
+        
+        # used the authenticate function(inbuilt fun) to authenticate the user
+        
+        # this below authenticate function will return the user Object if the user is authenticated else it will return None
+        user=authenticate(request,username=userid,password=password) #this will authenticate the user
+        if user is not None:
+            login(request,user) #login function is inbuilt in django, it will login the user and create a session for the user in the database and inside of our browser..then the suer will be officially logged in
+            return redirect('home')
+        else:
+            messages.error(request,'Username or password is incorrect')
+    context={}
+    return render(request,'base/login_register.html',context)
+
+# here i have directly logoiut the user from the home page and havent created any logout template
+def logoutUser(request):
+    logout(request)     #this willd delete the session of the user from the database and from the browser
+    return redirect('home')

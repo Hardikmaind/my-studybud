@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions',          #django by defalt has session based authentication. this is the sessions table
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',             #this is the app we created ..it targets the apps.py file in the base folder then the BaseConfig class in that file
