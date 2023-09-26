@@ -5,6 +5,7 @@ from .forms import RoomForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm          #we will customise tis form later ..but for now ets use this default
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Room ,Topic     #first we import the model that we want to query
@@ -209,7 +210,8 @@ def logoutUser(request):
 
 
 def registerPage(request):
-        # we have added this page for a reason...to apply the cond in the login_register.html file..that if the page is login the show login...if the page is register then show register
+     
 
-    page='register'
-    return render(request,'base/login_register.html')
+    form=UserCreationForm()
+    context={'form':form}
+    return render(request,'base/login_register.html',context)
