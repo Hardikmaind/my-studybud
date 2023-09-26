@@ -156,6 +156,7 @@ def deleteRoom(request,pk):
 
 #dont use login as a function name as it is a inbuilt function in django which we will be using
 def loginPage(request):
+    # we have added this page for a reason...to apply the cond in the login_register.html file..that if the page is login the show login...if the page is register then show register
     page='login'
     # now if the user is alreadt login he can still access the page by going to the url..so we need to restrict that.jaise hi user login page ("/login") mein jayega ye wala view trigger hoga  then this view niche noche check karega ki kya user already login hain..agar hain toh woh directly use redirect karega and if nahi login hain toh use login page pe jane dega...... see below
     if request.user.is_authenticated:   #this will check if the user is authenticated or not
@@ -207,7 +208,8 @@ def logoutUser(request):
     return redirect('home')
 
 
-def registerUser(request):
+def registerPage(request):
+        # we have added this page for a reason...to apply the cond in the login_register.html file..that if the page is login the show login...if the page is register then show register
+
     page='register'
-    
-    return render(request,'base/login_register.html',context={'page':page})
+    return render(request,'base/login_register.html')
