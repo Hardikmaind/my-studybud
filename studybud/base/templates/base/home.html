@@ -42,6 +42,7 @@
     <div>
       {% for room in rooms %}
       <div>
+        {% if request.user  == room.host %}   <!-- this is to check if the user is the host of the room or not ..if ther user is not the host ..then he will ot see the other rooms edit and delete room-->
         <a href="{% url 'update-room' room.id %}">Edit room</a>
         <a href="{% url 'delete-room' room.id %}">delete room</a>
         <!-- this below till dynamically route to differernt room -->
@@ -52,7 +53,7 @@
         <!-- Using Django URL Tag (<a href="{% url 'room' room.id %}">...</a>): -->
 
         <!-- in single quote of the href there is name of the view ..which is room -->
-
+        {% endif %}
         <span>@{{room.host.username}}</span>
         <!-- we can actually query upwards to the parent item,instead  of just attribute-->
         <h5>

@@ -12,4 +12,13 @@
         <input type="submit" value="login">
     </form>
 </div>
+<!-- {% if not request.user.is_authenticated %} -->
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        <input type="submit" value="Register">
+    </form>
+</div>
+<!-- {% endif %} -->
 {%  endblock content %}

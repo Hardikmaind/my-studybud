@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.db.models import Q
 from .forms import RoomForm 
+from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
@@ -112,6 +113,14 @@ def createRoom(request):
 def updateRoom(request,pk):
     room=Room.objects.get(id=pk)        #now we need to get this by unique value ..becaule if we have two value with same value like name,it gonna throw an erroe
     form=RoomForm(instance=room)        #here we are passing the instance of the room to the RoomForm() class in forms.py. the RoomForm() class will validate the data and return it to us. the form knows what fields to expect because we have defined it in the RoomForm() class in forms.py.
+    
+    
+    # now in theoryi can login and can update the anyone's room ...i want to restrict that user thenso ill do this below....Also this belowline means that if the lggedin user is not the host ofthe room...then it cannot update its room and it will giver a message as u are not allowed
+    if request.user!=room.host:     #this will check if the user is not the host of the room then it will print the below message as a http response
+        return HttpResponse('You are not allowed here')
+    
+    
+    
     if(request.method=='POST'):
          form=RoomForm(request.POST,instance=room)   #here we are passing the request.post data which wuill replace the prefill form with data instance=room(wahtever that is in the database)
          if form.is_valid():
@@ -147,6 +156,10 @@ def deleteRoom(request,pk):
 
 #dont use login as a function name as it is a inbuilt function in django which we will be using
 def loginPage(request):
+    page='login'
+    # now if the user is alreadt login he can still access the page by going to the url..so we need to restrict that.jaise hi user login page ("/login") mein jayega ye wala view trigger hoga  then this view niche noche check karega ki kya user already login hain..agar hain toh woh directly use redirect karega and if nahi login hain toh use login page pe jane dega...... see below
+    if request.user.is_authenticated:   #this will check if the user is authenticated or not
+        return redirect('home')         #if the user is authenticated then it will redirect the user to the home page
     
     if request.method=='POST':
         userid=request.POST.get('username')
@@ -175,7 +188,7 @@ def loginPage(request):
             return redirect('home')
         else:
             messages.error(request,'Username or password is incorrect')
-    context={}
+    context={'page':page}
     return render(request,'base/login_register.html',context)
 
 
@@ -194,3 +207,6 @@ def logoutUser(request):
     return redirect('home')
 
 
+def registerUser(request):
+    page='register'
+    return render(request,'base/login_register.html',context={'page':page})
