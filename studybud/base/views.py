@@ -164,7 +164,7 @@ def loginPage(request):
         return redirect('home')         #if the user is authenticated then it will redirect the user to the home page
     
     if request.method=='POST':
-        userid=request.POST.get('username')
+        userid=request.POST.get('username').lower().lower()
         password=request.POST.get('password')
         try:
             # explainnation of the below line
@@ -210,7 +210,17 @@ def logoutUser(request):
 
 
 def registerPage(request):
-     
+    if request.method=='POST':
+        form=UserCreationForm(request.POST)
+        if form.is_valid():
+            user=form.save(commit=False)    #this will save the form but will not commit it to the database 
+            # now i want to login the user after he has registered
+            user.username=user.username.lower()    #this will convert the username to lowercase
+            user.save()
+            login(request,user)     #here i have logged ther user in..the i have redireted to home page
+            return redirect('home')
+        else:
+            messages.error(request,'An error occured during the  registration')
 
     form=UserCreationForm()
     context={'form':form}

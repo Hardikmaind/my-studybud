@@ -19,7 +19,8 @@
  <div>
     <form method="POST" action="">
         {% csrf_token %}
-        {{form.as_p}}
+        <!-- jo context mein ka apan ko likhna hain woh apan aise likhte -->
+        {{form.as_p}}               
         <input type="submit" value="Register">
     </form>
     <p>Already signed up yet?  </p>

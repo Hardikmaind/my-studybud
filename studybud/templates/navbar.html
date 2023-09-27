@@ -9,6 +9,8 @@
     </form>
     <!-- we can access the request object directly inside the template..like see below how we did it -->
     {% if request.user.is_authenticated %}
+    <!-- here below i have displayed the user's name which is in he request objectcccc -->
+    <p>Hello {{request.user}}</p>
     <a href="{% url 'logout' %}">Logout</a>
     {% else %}
      
