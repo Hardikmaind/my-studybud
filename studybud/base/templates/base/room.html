@@ -4,5 +4,14 @@
 
 <!-- here below room is passed via the contxt in the views ..adn we are accessing the description from it -->
 <p>{{room.description}}</p>
+<div class="comment-wrapper">
+    <h3>Conversations</h3>
+    <hr>
+    {% for message in messages %}
+    <div>
+        <span> </span>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

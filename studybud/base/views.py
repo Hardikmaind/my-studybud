@@ -28,7 +28,8 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-
+    # bewlow this says give us the set of messages that are related to this specific room
+    message=room.message_set.all()  #here we are querying the message model which is related to the room model.ie we can query the child model from the parent model(here room is the parent model and message is the child model). and we write the child model in Lower case like here i have written "Message" model in lower case and applied "_set.all()" method to it
     context = {'room': room}
     return render(request, 'base/room.html', context)
 

@@ -1,0 +1,5 @@
+we need to let djnago know about this tempalte folder...go into the settings.py and add it there
+
+
+sqlite3 db.sqlite3 .dump > sqlite_dump.sql
+Above cmd to dump the data of sqlite into in .sql format
