@@ -1,11 +1,8 @@
-
-{% extends 'main.html' %} 
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 <h1>{{room.name}}</h1>
-          <!-- #done here room.name . and dynamically passing the room name..since we have already passed the room id in the url -->
+<!-- #done here room.name . and dynamically passing the room name..since we have already passed the room id in the url -->
 
-          <!-- here below room is passed via the contxt in the views ..adn we are accessing the description from it -->
+<!-- here below room is passed via the contxt in the views ..adn we are accessing the description from it -->
 <p>{{room.description}}</p>
 
-    
 {% endblock %}

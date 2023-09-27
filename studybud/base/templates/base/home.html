@@ -11,14 +11,11 @@
 
 <div class="home-container">
   <div>
-    
     <h3>Browse Topics</h3>
     <hr />
     <div>
       <!-- All mein query nahi bhej rahe hain...isliye ek bhi parameter nahi jayega -->
-      <a href="{% url 'home' %}"> 
-        ALL
-      </a>
+      <a href="{% url 'home' %}"> ALL </a>
     </div>
     {% for x in topics %}
     <!-- this value taken in the parameter in query will ne used to fillter the topics in browse topic menu -->
@@ -37,12 +34,13 @@
     <!-- {% comment %}
     <h1>home template</h1>
     {% endcomment %} -->
-      <h5>{{room_count}} rooms available</h5>
+    <h5>{{room_count}} rooms available</h5>
     <a href="{% url 'create-room' %}">Create Room</a>
     <div>
       {% for room in rooms %}
       <div>
-        {% if request.user  == room.host %}   <!-- this is to check if the user is the host of the room or not ..if ther user is not the host ..then he will ot see the other rooms edit and delete room-->
+        {% if request.user == room.host %}
+        <!-- this is to check if the user is the host of the room or not ..if ther user is not the host ..then he will ot see the other rooms edit and delete room-->
         <a href="{% url 'update-room' room.id %}">Edit room</a>
         <a href="{% url 'delete-room' room.id %}">delete room</a>
         <!-- this below till dynamically route to differernt room -->
