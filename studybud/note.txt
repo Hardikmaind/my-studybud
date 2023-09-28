@@ -3,3 +3,5 @@ we need to let djnago know about this tempalte folder...go into the settings.py 
 
 sqlite3 db.sqlite3 .dump > sqlite_dump.sql
 Above cmd to dump the data of sqlite into in .sql format
+
+flow of django-> 1) first we go to the templates then..there the url is linked in the href..alos the slug is there if needed. this url is connected with the "name" in the url. when that url is visited then...the particular view is triggered . this is the flow.In this view we manage and manipulate the models. vies contains the Business Logic
