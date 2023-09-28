@@ -3,7 +3,7 @@
 <form method="POST" action=" ">
     {% csrf_token %}
     <p> Are you sure you want to delete "{{obj}}"?</p>
-    {% comment %} this below href " request.META.HTTP_REFERER" will send the user where he came from after pressing the <a> link {% endcomment %}
+     <!-- this below href " request.META.HTTP_REFERER" will send the user where he came from after pressing the <a> link  -->
     <a href="{{request.META.HTTP_REFERER}}">Go back</a>       
     <input type="submit" value="Confirm">
 </form>

@@ -20,6 +20,9 @@
       <hr />
       {% for message in room_message1 %}
       <div>
+          {% if message.user == request.user %}
+        <a href="{% url 'delete-message' message.id %}">delete </a>
+          {% endif %}
         <!-- here time since is the filter applie on created...it will show us not the time the message was sent but the time which has passeed since the message has sent -->
         <small> {{message.user}} @{{message.created | timesince}} ago </small>
         <p>{{message.body}}</p>
