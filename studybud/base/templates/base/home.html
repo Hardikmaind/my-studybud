@@ -82,7 +82,13 @@
       <small> replied to "{{x.room}}"</small>
       <!-- below i want to outputonly the strring representtation and not th ewhole string so i will use the dunder method in the message model which give the string represent taion of the message modal and just 50 letters of it. "    def __str__(self):
         return self.body[0:50]"...so i dont need to put the x.body...if i just write the "x" then this will be string representation will be shown -->
-      <p>message:- {{x}}</p>    
+      <p>message:- {{x}}</p>
+      <!-- this below means that if the user which is logged in and teh user in  message modal are the same then only delete button will be seen . that means erik can only delete his message there -->
+      {% if x.user == request.user %}
+      <!-- in this below we  wills send the id of the room messages as the primary key -->
+        <a href="{% url 'delete-message' x.id %}">delete </a>
+          {% endif %}
+      <hr>
     </div>
     {% endfor %}
   </div>
