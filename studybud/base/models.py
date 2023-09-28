@@ -11,10 +11,13 @@ class Topic(models.Model):
 
 
 class Room(models.Model):
+    host = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     name = models.CharField(max_length=200)
-
     description = models.TextField(null=True, blank=True)
+    # ManyToManyField this below states the field
+    # now since the user modal is already connected to the room modal in host. so here we need to specify the related name we can do this regardless,but in this case because we have it we need to specify it anmd that just means that we cant reference a user because we already have a  'User' in the room modal(in hose)
+    participants = models.ManyToManyField(User,related_name='participants', blank=True)
 
     updated = models.DateTimeField(auto_now=True)
 
@@ -22,7 +25,6 @@ class Room(models.Model):
 
     topic = models.ForeignKey(Topic, null=True, on_delete=models.SET_NULL)
 
-    host = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     class Meta:
 
