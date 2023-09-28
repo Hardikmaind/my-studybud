@@ -19,10 +19,11 @@ def home(request):
         name__icontains=q) | Q(description__icontains=q))
 
     room_count = rooms.count()
+    room_message=Message.objects.all()
 
     topics = Topic.objects.all()
 
-    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count}
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count,'room_message1':room_message}
     return render(request, 'base/home.html', context)
 
 
@@ -31,7 +32,7 @@ def room(request, pk):
     
     # 'order_by('-created')'  here this says that order the messages in descending order of their creation time...created is the arttribute i have create in the message modals
     # bewlow this says give us the set of messages that are related to this specific room
-    room_message=room.message_set.all().order_by('-created')  #here we are querying the message model which is related to the room model.ie we can query the child model from the parent model(here room is the parent model and message is the child model). and we write the child model in Lower case like here i have written "Message" model in lower case and applied "_set.all()" method to it
+    room_message=room.message_set.all() #here we are querying the message model which is related to the room model.ie we can query the child model from the parent model(here room is the parent model and message is the child model). and we write the child model in Lower case like here i have written "Message" model in lower case and applied "_set.all()" method to it
     
     
     participants=room.participants.all()        #we use all() for many to many and _set.all() for many to one...yaha se apan ne saare participants ko nikal liya aur unko ek variable mein store kar liya jo hain participants and then this variable is passed in the context dictionary below..and then in the room.html we have applied for loop on this variable

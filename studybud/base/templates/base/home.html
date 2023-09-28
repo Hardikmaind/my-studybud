@@ -5,11 +5,13 @@
 <style>
   .home-container {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 3fr 1fr;
   }
 </style>
 
 <div class="home-container">
+  <!-- this is the firsty col -->
+
   <div>
     <h3>Browse Topics</h3>
     <hr />
@@ -30,6 +32,7 @@
     {% endfor %}
   </div>
 
+  <!-- this is the second col -->
   <div>
     <!-- {% comment %}
     <h1>home template</h1>
@@ -68,6 +71,21 @@
       {% endfor %}
     </div>
   </div>
-</div>
 
-{% endblock %}
+  <!-- this is the third col -->
+  <div>
+    <h3>Recent Activity</h3>
+    <hr />
+    {% for x in room_message1 %}
+    <div>
+      <small>@{{x.user}} {{x.created|timesince}}</small>
+      <small> replied to "{{x.room}}"</small>
+      <!-- below i want to outputonly the strring representtation and not th ewhole string so i will use the dunder method in the message model which give the string represent taion of the message modal and just 50 letters of it. "    def __str__(self):
+        return self.body[0:50]"...so i dont need to put the x.body...if i just write the "x" then this will be string representation will be shown -->
+      <p>message:- {{x}}</p>    
+    </div>
+    {% endfor %}
+  </div>
+
+  {% endblock %}
+</div>
