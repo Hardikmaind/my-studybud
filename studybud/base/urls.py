@@ -8,7 +8,7 @@ urlpatterns = [
       #pk parameter is for dynamic routing.it is a primary key
     path('room/<str:pk>', views.room,name="room"),   #when the user goes to the home page, the home function is called 
 
-
+    path('profile/<str:pk>/', views.userProfile,name="user-profile"),
 
     # people pass it int into url. abov ei have passed the pk as a string
     #     path('room/<slug:pk>', views.room,name="room"), 

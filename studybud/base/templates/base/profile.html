@@ -1,4 +1,8 @@
-{% extends 'main.html' %}
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 <h1>{{user.username}}</h1>
+<div>
+    <div></div>
+    <div>{%include 'base/feed_component.html' %}</div>
+    <div></div>
+</div>
 {% endblock %}

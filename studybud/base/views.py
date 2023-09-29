@@ -67,11 +67,11 @@ def room(request, pk):
 
 def userProfile(request,pk):
     user=User.objects.get(id=pk)
-    rooms=user.room_set.all() # we can get all the children ofg the specific object by setting the .._set.all() method
-    context={'user':user}
+    # rooms = user.room_set.all(): Assuming that you have a related model named Room with a ForeignKey or a ManyToManyField to the User model, this line fetches all the rooms associated with the user. The room_set attribute is created by Django for reverse relationships.
+    rooms=user.room_set.all() # we can get all the children of the specific object by setting the .._set.all() method
+    context={'user':user,'rooms':rooms}
     return render(request, 'base/profile.html',context)
     
-
 
 
 @login_required(login_url='login')
