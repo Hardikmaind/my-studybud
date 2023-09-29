@@ -67,6 +67,7 @@ def room(request, pk):
 
 def userProfile(request,pk):
     user=User.objects.get(id=pk)
+    rooms=user.room_set.all() # we can get all the children ofg the specific object by setting the .._set.all() method
     context={'user':user}
     return render(request, 'base/profile.html',context)
     
