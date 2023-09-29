@@ -1,0 +1,17 @@
+<h3>Browse Topics</h3>
+    <hr />
+    <div>
+      <!-- All mein query nahi bhej rahe hain...isliye ek bhi parameter nahi jayega -->
+      <a href="{% url 'home' %}"> ALL </a>
+    </div>
+    {% for x in topics %}
+    <!-- this value taken in the parameter in query will ne used to fillter the topics in browse topic menu -->
+    <div>
+      <!-- ismein query jaa rahi hain...matlab when i click them the parameter will be passed -->
+      <a href="{% url 'home' %}?query={{x.name}}">
+        <!-- {{x.id}})       -->
+        <!-- here below i rendered all the topics -->
+        {{x.name}}
+      </a>
+    </div>
+    {% endfor %}

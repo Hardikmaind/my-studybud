@@ -13,23 +13,7 @@
   <!-- this is the firsty col -->
 
   <div>
-    <h3>Browse Topics</h3>
-    <hr />
-    <div>
-      <!-- All mein query nahi bhej rahe hain...isliye ek bhi parameter nahi jayega -->
-      <a href="{% url 'home' %}"> ALL </a>
-    </div>
-    {% for x in topics %}
-    <!-- this value taken in the parameter in query will ne used to fillter the topics in browse topic menu -->
-    <div>
-      <!-- ismein query jaa rahi hain...matlab when i click them the parameter will be passed -->
-      <a href="{% url 'home' %}?query={{x.name}}">
-        <!-- {{x.id}})       -->
-        <!-- here below i rendered all the topics -->
-        {{x.name}}
-      </a>
-    </div>
-    {% endfor %}
+    {%include 'base/topic_component.html' %}
   </div>
 
   <!-- this is the second col -->
@@ -40,57 +24,13 @@
     <h5>{{room_count}} rooms available</h5>
     <a href="{% url 'create-room' %}">Create Room</a>
     <div>
-      {% for room in rooms %}
-      <div>
-        {% if request.user == room.host %}
-        <!-- this is to check if the user is the host of the room or not ..if ther user is not the host ..then he will ot see the other rooms edit and delete room-->
-        <a href="{% url 'update-room' room.id %}">Edit room</a>
-        <a href="{% url 'delete-room' room.id %}">delete room</a>
-        <!-- this below till dynamically route to differernt room -->
-
-        <!-- Using Hard-Coded URL (<a href="/room/{{room.id}}">...</a>): -->
-        <!-- <h2>{{room.id}}----<a href="/room/{{room.id}}"> {{room.name}}</a></h2>         -->
-
-        <!-- Using Django URL Tag (<a href="{% url 'room' room.id %}">...</a>): -->
-
-        <!-- in single quote of the href there is name of the view ..which is room -->
-        {% endif %}
-        <span>@{{room.host.username}}</span>
-        <!-- we can actually query upwards to the parent item,instead  of just attribute-->
-        <h5>
-          {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>
-        </h5>
-        <!-- isse jiska name room ho woh url se associate kar dega...so whatever the url may be is several places in our code...we can just access it by the name  given to that url...and just have to write the name correctly-->
-        <small> {{room.topic.name}} </small>
-        <div class=""></div>
-        <div>Description:</div>
-        <small> {{room.description}} </small>
-        <!-- whatever written in content dictionary we pass it like this-->
-        <hr />
-      </div>
-      {% endfor %}
+     {% include 'base/feed_component.html' %}
     </div>
   </div>
 
   <!-- this is the third col -->
   <div>
-    <h3>Recent Activity</h3>
-    <hr />
-    {% for x in room_message1 %}
-    <div>
-      <small>@{{x.user}} {{x.created|timesince}}</small>
-      <small> replied to "{{x.room}}"</small>
-      <!-- below i want to outputonly the strring representtation and not th ewhole string so i will use the dunder method in the message model which give the string represent taion of the message modal and just 50 letters of it. "    def __str__(self):
-        return self.body[0:50]"...so i dont need to put the x.body...if i just write the "x" then this will be string representation will be shown -->
-      <p>message:- {{x}}</p>
-      <!-- this below means that if the user which is logged in and teh user in  message modal are the same then only delete button will be seen . that means erik can only delete his message there -->
-      {% if x.user == request.user %}
-      <!-- in this below we  wills send the id of the room messages as the primary key -->
-        <a href="{% url 'delete-message' x.id %}">delete </a>
-          {% endif %}
-      <hr>
-    </div>
-    {% endfor %}
+   {% include 'base/activity_component.html' %}
   </div>
 
   {% endblock %}
