@@ -19,7 +19,8 @@ def home(request):
         name__icontains=q) | Q(description__icontains=q))
 
     room_count = rooms.count()
-    room_message=Message.objects.all()
+    # when clicked on this ,this will give us the activity of the room we have selected 
+    room_message=Message.objects.filter(Q(room__topic__name__icontains=q))
 
     topics = Topic.objects.all()
 
