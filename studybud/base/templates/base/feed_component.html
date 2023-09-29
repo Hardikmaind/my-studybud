@@ -13,7 +13,7 @@
 
   <!-- in single quote of the href there is name of the view ..which is room -->
   {% endif %}
-  <span>@{{room.host.username}}</span>
+  <a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a>
   <!-- we can actually query upwards to the parent item,instead  of just attribute-->
   <h5>
     {{room.id}}----<a href="{% url 'room' room.id %}"> {{room.name}}</a>

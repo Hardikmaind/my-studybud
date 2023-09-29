@@ -60,6 +60,17 @@ def room(request, pk):
     context = {'room': room,'room_message1':room_message,'participants':participants}
     #  ismein jo room_message hain maine woh room_message1 mein likh diya and then in room.html i have  applied for loop on room_message1
     return render(request, 'base/room.html', context)
+# this above line means that when the above view is triggerd then the base/room.html template is rendered and the context dictionary is passed in the template...this is imp
+
+
+
+
+def userProfile(request,pk):
+    user=User.objects.get(id=pk)
+    context={'user':user}
+    return render(request, 'base/profile.html',context)
+    
+
 
 
 @login_required(login_url='login')
