@@ -24,7 +24,7 @@ def home(request):
 
     topics = Topic.objects.all()
 
-    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count,'room_message1':room_message}
+    context = {'rooms': rooms, 'topics': topics, 'room_count': room_count,'room_messages':room_message}
     return render(request, 'base/home.html', context)
 
 
@@ -57,8 +57,8 @@ def room(request, pk):
     
         
     
-    context = {'room': room,'room_message1':room_message,'participants':participants}
-    #  ismein jo room_message hain maine woh room_message1 mein likh diya and then in room.html i have  applied for loop on room_message1
+    context = {'room': room,'room_messages':room_message,'participants':participants}
+    #  ismein jo room_message hain maine woh room_messages mein likh diya and then in room.html i have  applied for loop on room_messages
     return render(request, 'base/room.html', context)
 # this above line means that when the above view is triggerd then the base/room.html template is rendered and the context dictionary is passed in the template...this is imp
 
@@ -69,7 +69,9 @@ def userProfile(request,pk):
     user=User.objects.get(id=pk)
     # rooms = user.room_set.all(): Assuming that you have a related model named Room with a ForeignKey or a ManyToManyField to the User model, this line fetches all the rooms associated with the user. The room_set attribute is created by Django for reverse relationships.
     rooms=user.room_set.all() # we can get all the children of the specific object by setting the .._set.all() method
-    context={'user':user,'rooms':rooms}
+    room_messages=user.message_set.all()
+    topics=Topic.objects.all()
+    context={'user':user,'rooms':rooms,'room_messages':room_messages,'topics':topics}
     return render(request, 'base/profile.html',context)
     
 
