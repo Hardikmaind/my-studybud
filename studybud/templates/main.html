@@ -1,22 +1,23 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>study bud</title>
-</head>
-<body>
-    {%  include 'navbar.html' %}
-
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    {% block content %}
-
-    
-    {% endblock %}
-    
-</body>
+    <link
+      rel="stylesheet"
+      typer="'text/css"
+      media="screen"
+      href="{% static 'styles/main.css'%}"
+    />
+  </head>
+  <body>
+    {% include 'navbar.html' %} {% if messages %} {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} {% endif %} 
+    <!-- this is how we add iamge in the django -->
+    <!-- <img src="{% static 'images/htpps.jpeg' %}"/> -->
+    {% block content %} {% endblock %}
+  </body>
 </html>
