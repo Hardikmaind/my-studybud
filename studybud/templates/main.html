@@ -13,9 +13,13 @@
     />
   </head>
   <body>
-    {% include 'navbar.html' %} {% if messages %} {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %} {% endif %} 
+    {% include 'navbar.html' %} {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     <!-- this is how we add iamge in the django -->
     <!-- <img src="{% static 'images/htpps.jpeg' %}"/> -->
     {% block content %} {% endblock %}

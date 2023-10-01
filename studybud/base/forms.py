@@ -11,3 +11,9 @@ class RoomForm(ModelForm):
         fields='__all__'   #this will give us all the fields in the form...present in modal Room like host ,topic,name etc  just udated and creatd will not be shown since those re not editable fields  
         # if we want the oarticular fields then we can do like this 
         # fields=['name','topic','body','votes_to_skip'] 
+        
+        
+        
+        # removed the host and participant from rendering inthe create room form...this is how i exclude.
+        # Host and participant should automatically updated...i have wrote the backend for it in create room view
+        exclude=['host','participants']
