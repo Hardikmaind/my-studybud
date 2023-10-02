@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
   <main class="profile-page layout layout--3">
     <div class="container">
@@ -46,5 +47,7 @@
       <!-- Activities End -->
     </div>
   </main>
-{% endblock %}
+  <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock content %}
 

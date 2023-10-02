@@ -1,0 +1,16 @@
+{% extends 'main.html'%}
+{% block content %}
+<div>
+    <!-- in this below form if  i dont specify the action the form will be posted at the current url that we are at   .  -->
+    <form  method="POST" action="">
+        {% csrf_token %}   
+        <!-- inside of every form in django we need to add csef_token. this below token will be sent on every form token .this will prevent any external attacks-->
+
+
+
+        <!--  in the below we passed the form.as_p this as_p will pass the form as a paragraph -->
+        {{form.as_p}}         <!-- whatever written in content dictionary we pass it like this-->
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock content %}
