@@ -1,3 +1,5 @@
+<div>
+
 {% for x in room_messages %}
 <div class="activities">
   <div class="activities__header">
@@ -10,11 +12,11 @@
           <img src="https://randomuser.me/api/portraits/women/11.jpg" />
         </div>
         <p>
-          @@{{x.user}}
+          @{{x.user}}
           <span>{{x.created|timesince}}</span>
         </p>
       </a>
-      {% if x.user == request.user %}   
+      {% if x.user == request.user %}
       <div class="roomListRoom__actions">
         <a href="{% url 'delete-message' x.id %}">
           <svg
@@ -30,37 +32,19 @@
             ></path>
           </svg>
         </a>
-      </div> {% endif %}
+      </div>
+      {% endif %}
     </div>
     <div class="activities__boxContent">
       <p>
-        replied to post “<a href="room.html">100 Days of code challenge!</a
-        >”
+        replied to post “<a href="{%url 'room' x.room.id %}">{{x.room}}</a>”
       </p>
       <div class="activities__boxRoomContent">
-        I’ll have to try this sometime. Really like this idea. Wanna talk
-        about it? I ‘m....
+        {{x.body}}
       </div>
     </div>
   </div>
-
 </div>
 {% endfor %}
-
-
-
-
-
- 
-    <div>
-      <small><a href="{% url 'user-profile' x.user.id %}"> @{{x.user}}</a> {{x.created|timesince}}</small>
-      <small> Replied to "{{x.room}}"</small>
-      <!-- below i want to outputonly the strring representtation and not th ewhole string so i will use the dunder method in the message model which give the string represent taion of the message modal and just 50 letters of it. "    def __str__(self):
-        return self.body[0:50]"...so i dont need to put the x.body...if i just write the "x" then this will be string representation will be shown -->
-      <p></p>
-      <!-- this below means that if the user which is logged in and teh user in  message modal are the same then only delete button will be seen . that means erik can only delete his message there -->
-      
-      <hr>
-    </div>
-    <!-- this is hardik -->
+</div>
 
