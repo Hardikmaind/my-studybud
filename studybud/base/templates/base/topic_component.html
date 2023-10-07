@@ -14,7 +14,8 @@
     {%endfor%}
     
   </ul>
-  <a class="btn btn--link" href="topics.html">
+  <!-- here below i have said that if clicked on more then direct to the topics page..which when rendered will trigger its respective associated view  -->
+  <a class="btn btn--link" href="{% url 'topics' %}">
     More
     <svg
       version="1.1"

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
-from .forms import RoomForm,UserForm
+from .forms import RoomForm, UserForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -22,7 +22,9 @@ def home(request):
 
     room_message = Message.objects.filter(Q(room__topic__name__icontains=q))
 
-    topics = Topic.objects.all()
+    # below we have limited the no of topics to render on the home screen whicha are 6
+
+    topics = Topic.objects.all()[0:5]
 
     context = {'rooms': rooms, 'topics': topics,
                'room_count': room_count, 'room_messages': room_message}
@@ -33,7 +35,7 @@ def room(request, pk):
     room = Room.objects.get(id=pk)
     room_message = room.message_set.all()
     participants = room.participants.all()
-    
+
     if request.method == "POST":
         message = Message.objects.create(
             user=request.user,
@@ -45,6 +47,7 @@ def room(request, pk):
     context = {'room': room, 'room_messages': room_message,
                'participants': participants}
     return render(request, 'base/room.html', context)
+
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
@@ -60,12 +63,13 @@ def userProfile(request, pk):
 @login_required(login_url='login')
 def createRoom(request):
     form = RoomForm()
-    topics=Topic.objects.all()      #here i have taken all the topics from the Topics table/Model
-    
+    # here i have taken all the topics from the Topics table/Model
+    topics = Topic.objects.all()
+
     if request.method == 'POST':
-        topic_name=request.POST.get('topic')
-        topic,created=Topic.objects.get_or_create(name=topic_name)
-        
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
         Room.objects.create(
             host=request.user,
             topic=topic,
@@ -74,59 +78,53 @@ def createRoom(request):
         )
         return redirect('home')
 
-        
         # form = RoomForm(request.POST)
         # if form.is_valid():
         #     room = form.save(commit=False)
         #     room.host = request.user
         #     room.save()
-       
 
-    return render(request, 'base/room_form.html', context={'form': form,'topics':topics})
+    return render(request, 'base/room_form.html', context={'form': form, 'topics': topics})
 
 
 @login_required(login_url='login')
 def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
-    topics=Topic.objects.all()
+    topics = Topic.objects.all()
     if request.user != room.host:
         return HttpResponse('You are not allowed here')
 
     if (request.method == 'POST'):
-        topic_name=request.POST.get('topic')
-        topic,created=Topic.objects.get_or_create(name=topic_name)
-        room.name=request.POST.get('name')
-        room.topic=topic
-        room.description=request.POST.get('description')
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
         room.save()
         # form = RoomForm(request.POST, instance=room)
         # if form.is_valid():
         #     form.save()
         return redirect('home')
-    context = {'form': form,'topics':topics,'room':room}
+    context = {'form': form, 'topics': topics, 'room': room}
     return render(request, 'base/room_form.html', context)
-
 
 
 # form = UserForm(request.POST, instance=user): Inside the POST block, a new UserForm instance is created with the data from the POST request (the data submitted by the user). The instance=user argument tells the form to update the existing user's data with the new data provided in the POST request.
 
 @login_required(login_url='login')
 def updateUser(request):
-    user=request.user
-    form=UserForm(instance=user)
+    user = request.user
+    form = UserForm(instance=user)
     if request.method == 'POST':
-        form=UserForm(request.POST, instance=user)
+        form = UserForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('user-profile',pk=user.id)
-    
-    return render(request,'base/update-user.html',{'form':form})
+            return redirect('user-profile', pk=user.id)
+
+    return render(request, 'base/update-user.html', {'form': form})
 
 # instance=user: The instance parameter is used to specify an instance of a model that should be associated with the form. In this case, you're passing the user object as the instance. This means that the form will be pre-populated with the data from the user object. Essentially, it loads the current user's data into the form fields for editing.
-
-    
-    
 
 
 @login_required(login_url='login')
@@ -208,6 +206,7 @@ def topicsPage(request):
 
     # since i have written nothing inside thefilte therefore it wil act as a .all()
     # topics=Topic.objects.filter()
-    topics=Topic.objects.filter(name__icontains=q)
-    context = {'topics':topics}
-    return render(request,'base/topics.html', context)
+    
+    topics = Topic.objects.filter(name__icontains=q)
+    context = {'topics': topics}
+    return render(request, 'base/topics.html', context)
