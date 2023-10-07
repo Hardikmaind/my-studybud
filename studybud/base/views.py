@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
-from .forms import RoomForm
+from .forms import RoomForm,UserForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -106,6 +106,24 @@ def updateRoom(request, pk):
         return redirect('home')
     context = {'form': form,'topics':topics,'room':room}
     return render(request, 'base/room_form.html', context)
+
+
+
+# form = UserForm(request.POST, instance=user): Inside the POST block, a new UserForm instance is created with the data from the POST request (the data submitted by the user). The instance=user argument tells the form to update the existing user's data with the new data provided in the POST request.
+
+@login_required(login_url='login')
+def updateUser(request):
+    user=request.user
+    form=UserForm(instance=user)
+    if request.method == 'POST':
+        form=UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile',pk=user.id)
+    
+    return render(request,'base/update-user.html',{'form':form})
+    
+    
 
 
 @login_required(login_url='login')
