@@ -122,6 +122,9 @@ def updateUser(request):
             return redirect('user-profile',pk=user.id)
     
     return render(request,'base/update-user.html',{'form':form})
+
+# instance=user: The instance parameter is used to specify an instance of a model that should be associated with the form. In this case, you're passing the user object as the instance. This means that the form will be pre-populated with the data from the user object. Essentially, it loads the current user's data into the form fields for editing.
+
     
     
 
