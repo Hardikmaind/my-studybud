@@ -9,7 +9,7 @@
     {% for x in topics %}
     <li>
       <!-- in the below x.room.count,.all...here we dont need to add the curly braces -->
-      <a href="{% url 'home' %}?query={{x.name}}"> {{x.name}} <span>{{x.room_set.all.count}}</span></a>
+      <a href="{% url 'home' %}?q={{x.name}}"> {{x.name}} <span>{{x.room_set.all.count}}</span></a>
     </li>
     {%endfor%}
     
