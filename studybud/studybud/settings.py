@@ -150,7 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     "https://sub.example.com",
 #     "http://localhost:8080",
 #     "http://127.0.0.1:9000",
-#     "http://127.0.0.1:5500"
+#     "http://127.0.0.1:5500" 
 # ]
 
 #or we can also set this to allow everyone and any url to access this url
