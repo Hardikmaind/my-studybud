@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',             #this is the app we created ..it targets the apps.py file in the base folder then the BaseConfig class in that file
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
