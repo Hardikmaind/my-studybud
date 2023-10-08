@@ -39,12 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',             #this is the app we created ..it targets the apps.py file in the base folder then the BaseConfig class in that file
     'rest_framework',
+    
+    # below i have download this to tackle the cors issue . for ths i have installed the pip package
+    "corsheaders",
+
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    # this is the middle for the package we have installed to resolve the cors issue
+    "corsheaders.middleware.CorsMiddleware",
+
+    
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,3 +142,17 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# here below we can allow the particular set of urls to access this api
+
+# CORS_ALLOWED_ORIGINS = [
+#     "https://example.com",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+#     "http://127.0.0.1:5500"
+# ]
+
+#or we can also set this to allow everyone and any url to access this url
+# by default this is false...i dit it for true
+CORS_ALLOW_ALL_ORIGINS = True
