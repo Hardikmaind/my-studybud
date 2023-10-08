@@ -35,3 +35,14 @@ def getRooms(request):
     
     # now since we dont want to return the object ...we want to return a data attribute inside it..so we will do it like below
     return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def getRoom(request, pk):
+    # ismien saare room object nahi ayenge bas wohi junki id =pk hain wohi
+    room=Room.objects.get(id=pk)
+    # below many is gonna be false since we will be returning only the single object
+    serializer=RoomSerializer(room,many=False)
+    return Response(serializer.data)
+    
