@@ -1,3 +1,11 @@
+username- hardikmaind   => this is my superusername
+pass--sRS.6wJ@mwik6L
+
+
+
+
+
+
 we need to let djnago know about this tempalte folder...go into the settings.py and add it there
 
 
