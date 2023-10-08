@@ -1,4 +1,12 @@
+
 # views maddhe thevnar apan functions
 #urls madhe thevnar apan paths
 #template madhe apan thevnar html files i.e templates
 # for access the admin panel we need the password of it.. we need to generate it by executing some commmands "python manage.py createsuperuser" then we have to enter the username,email and password...in this way the super user will be created
+
+
+here customusermodel and the studybud has the same virtual env...son dont need to create new...jst activate it for both
+
+ django-admin startproject customusermodel=> toi make the project folder
+
+python manage.py  startapp base=> this is how we create the  app base in
