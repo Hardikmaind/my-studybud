@@ -19,4 +19,4 @@ class User(AbstractUser):
     
     # after creating the aboce make migrations
 
-    # now typically we dont have to register our user with the admin panel but because we created our own user model we do need to go into the admin.py and...follow further their
+    # now typically we dont have to register our user with the admin panel but because we created our own user model we do need to go into the admin.py and...follow further their 
