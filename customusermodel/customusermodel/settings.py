@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig'
 ]
+# i setted this variable below which will give the user idea to use the custome user module created by us instead of the already inbuilt model
+
+# because of the below we will be using User model in the base app to handle all the authentication and all...this is very imp
+AUTH_USER_MODEL= 'base.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
