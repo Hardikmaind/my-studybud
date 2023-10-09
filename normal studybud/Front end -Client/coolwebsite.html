@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cool websites</title>
+</head>
+<body>
+    <h1>this is a cool websites</h1>
+    <div id="room-container">
+
+    </div>
+    
+</body>
+
+<!-- now this below will not give us our output in the consoel...we will have issue with the CORS configuration (Cross origin resource sharing). you can see the in network in the chrome dev tools  -->
+<!-- what happening is here is this person is here trying to access out website here and django is saying i dont know who you are . you are accessing this resource from completing different resource and i am not gonna let you access this. so what we need to do is coinfigure that. So django can either allow all the endpoints to make request to our api or we can even provide the specific set of url that are allowed to call our api -->
+<!-- this is very common issue the cors issue -->
+<script>
+    let roomsContainer=document.getElementById('room-container')
+
+
+    let getAllRooms=async()=>{
+       let res=await fetch('http://127.0.0.1:8000/api/rooms/')
+        let rooms=await res.json()
+
+       console.log('this is the reposnse which is returning all the rooms',rooms)
+
+       for (let i=0;rooms.length>i;i++){
+        let room=rooms[i]
+        let row=`<div>
+                    <h3>${room.name}</h3>
+                </div>`
+        roomsContainer.innerHTML += row
+       }
+
+    }
+    getAllRooms()
+</script>
+</html>

@@ -1,0 +1,100 @@
+username- hardikmaind   => this is my superusername
+pass--sRS.6wJ@mwik6L
+
+
+
+
+
+
+we need to let djnago know about this tempalte folder...go into the settings.py and add it there
+
+
+sqlite3 db.sqlite3 .dump > sqlite_dump.sql
+Above cmd to dump the data of sqlite into in .sql format
+
+flow of django-> 1) first we go to the templates then..there the url is linked in the href..alos the slug is there if needed. this url is connected with the "name" in the url. when that url is visited then...the particular view is triggered . this is the flow.In this view we manage and manipulate the models. vies contains the Business Logic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+what is methods and action in a form
+ChatGPT
+
+In the context of HTML forms, "methods" and "actions" are attributes used to specify how the form should be submitted and where the data from the form should be sent.
+
+    Method: The method attribute specifies the HTTP method that should be used when submitting the form data. There are two common HTTP methods used with forms:
+
+        GET: This method appends the form data to the URL as query parameters. It is commonly used for requests that retrieve data from the server. For example, when you submit a search query on a website, it often uses the GET method to send the query parameters in the URL.
+
+        POST: This method sends the form data in the body of the HTTP request. It is commonly used for requests that modify data on the server, such as submitting a registration form or posting a comment on a website. Unlike GET, POST does not append data to the URL, which makes it more suitable for sensitive or large amounts of data.
+
+    Example usage:
+
+    html
+
+<form method="POST" action="/submit-form">
+    <!-- form fields go here -->
+    <input type="submit" value="Submit">
+</form>
+
+Action: The action attribute specifies the URL to which the form data should be submitted when the form is submitted. This URL can be an absolute URL (starting with http:// or https://) or a relative URL (relative to the current page's URL).
+
+Example usage:
+
+html
+
+    <form method="POST" action="/submit-form">
+        <!-- form fields go here -->
+        <input type="submit" value="Submit">
+    </form>
+
+In the example above, when the user submits the form, the data will be sent to the /submit-form URL using the HTTP POST method.
+
+These attributes are essential for defining how form data is transmitted to the server and how the server should handle that data. The choice between GET and POST depends on the specific use case and requirements of the form.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this is my form but i havent used the action here why\
+ChatGPT
+
+In the HTML form you provided, the action attribute is currently set to an empty string, which means that the form will submit to the same URL that the page is currently on. This can be a deliberate choice in web development for various reasons:
+
+    Same Page Submission (POST to Self): By setting the action to an empty string or not specifying it, the form will submit to the same page (i.e., the URL of the page where the form is located). This is often done when the form processing logic is handled on the same page using server-side code (e.g., Django views in Python or PHP scripts) or JavaScript. In such cases, the server-side code or JavaScript will handle the form submission and response, often without a page refresh.
+
+    Modular Web Components: In modern web development, single-page applications (SPAs) and component-based architectures are common. In such architectures, forms may be part of a larger component or module that manages its own state and behavior. Submitting the form to the same page allows for modular development, where each component can handle its own logic without relying on a separate URL endpoint.
+
+    Client-Side JavaScript Handling: In some cases, client-side JavaScript frameworks (e.g., React, Angular, or Vue.js) are used to handle form submissions. The JavaScript code can prevent the default form submission behavior and manage the submission process asynchronously without navigating to a different URL.
+
+    Custom Routing: In modern web frameworks and libraries, custom routing and URL handling are common. The form may submit to a URL that is managed by a routing system, which then determines how to handle the form submission and display the appropriate content.
+
+If you haven't specified an action attribute, you should check your web application's code (e.g., Django views or JavaScript code) to see how form submissions are being handled. The form data is likely being processed and handled by the server-side code or JavaScript logic within the same page or component.
