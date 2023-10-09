@@ -1,52 +1,56 @@
 from django.db import models
+# commented the below since we will not be using the below model
+# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUserser
 
-from django.contrib.auth.models import User
-
-
-class Topic(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
+class User(AbstractUser):
+    pass
 
 
-class Room(models.Model):
-    host = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+# class Topic(models.Model):
+#     name = models.CharField(max_length=200)
 
-    name = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
-    # ManyToManyField this below states the field
-    # now since the user modal is already connected to the room modal in host. so here we need to specify the related name we can do this regardless,but in this case because we have it we need to specify it anmd that just means that we cant reference a user because we already have a  'User' in the room modal(in hose)
-    participants = models.ManyToManyField(User,related_name='participants', blank=True)
-
-    updated = models.DateTimeField(auto_now=True)
-
-    created = models.DateTimeField(auto_now_add=True)
-
-    topic = models.ForeignKey(Topic, null=True, on_delete=models.SET_NULL)
+#     def __str__(self):
+#         return self.name
 
 
-    class Meta:
+# class Room(models.Model):
+#     host = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
-        ordering = ['-updated', '-created']
+#     name = models.CharField(max_length=200)
+#     description = models.TextField(null=True, blank=True)
+#     # ManyToManyField this below states the field
+#     # now since the user modal is already connected to the room modal in host. so here we need to specify the related name we can do this regardless,but in this case because we have it we need to specify it anmd that just means that we cant reference a user because we already have a  'User' in the room modal(in hose)
+#     participants = models.ManyToManyField(User,related_name='participants', blank=True)
 
-    def __str__(self):
-        return self.name
+#     updated = models.DateTimeField(auto_now=True)
+
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     topic = models.ForeignKey(Topic, null=True, on_delete=models.SET_NULL)
 
 
-class Message(models.Model):
+#     class Meta:
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+#         ordering = ['-updated', '-created']
 
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+#     def __str__(self):
+#         return self.name
 
-    body = models.TextField()
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
+# class Message(models.Model):
 
-        ordering = ['-updated', '-created']
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.body[0:50]
+#     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+#     body = models.TextField()
+#     updated = models.DateTimeField(auto_now=True)
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+
+#         ordering = ['-updated', '-created']
+
+#     def __str__(self):
+#         return self.body[0:50]
