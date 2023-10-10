@@ -132,10 +132,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# below is the url for all the links and standard images
 STATIC_URL = 'static/'
+# below is the media url for all the user uploaded pictures...now they are gonna be prefixed with the images
+MEDIA_URL='/image/'
+
 STATICFILES_DIRS=[
     BASE_DIR/'static'
 ]
+# after the user uploads the image ..the images iwill be uploaded in the below path
+MEDIA_ROOT=BASE_DIR/'static/images'
+
 
 # this below to add the user added pics
 # STATIC_ROOT=
