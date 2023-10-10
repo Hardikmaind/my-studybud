@@ -4,11 +4,10 @@ from django.db.models import Q
 from .forms import RoomForm, UserForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.http.response import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Room, Topic, Message
+from .models import Room, Topic, Message ,User
 
 
 def home(request):
