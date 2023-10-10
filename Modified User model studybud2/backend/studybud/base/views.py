@@ -139,7 +139,7 @@ def deleteRoom(request, pk):
 
 
 def loginPage(request):
-
+# here below we have wrote the condition to render the register and the login. for this i have passed the string page in the context..and the condition will be applied to this page in the login_register.html form
     page = 'login'
 
     if request.user.is_authenticated:
