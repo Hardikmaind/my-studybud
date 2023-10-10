@@ -1,0 +1,57 @@
+{% extends 'main.html' %} {% block content %}
+
+<style>
+  .room-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+</style>
+
+<div class="room-container">
+  <div>
+    <h1>{{room.name}}</h1>
+    <!-- #done here room.name . and dynamically passing the room name..since we have already passed the room id in the url -->
+
+    <!-- here below room is passed via the contxt in the views ..adn we are accessing the description from it -->
+    <p>{{room.description}}</p>
+    <div class="comment-wrapper">
+      <h3>Conversations</h3>
+      <hr />
+      {% for message in room_messages %}
+      <div>
+        {% if message.user == request.user %}
+        <a href="{% url 'delete-message' message.id %}">delete </a>
+        {% endif %}
+        <!-- here time since is the filter applie on created...it will show us not the time the message was sent but the time which has passeed since the message has sent -->
+        <small> {{message.user}} @{{message.created | timesince}} ago </small>
+        <p>{{message.body}}</p>
+        <hr />
+      </div>
+      {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="comment-form">
+      <form method="POST" action="">
+        {% csrf_token %}
+        <label for="body">Send your message here :- </label>
+        <input
+          type="text"
+          id="body"
+          name="body"
+          placeholder="Write your message here"
+        />
+      </form>
+    </div>
+    {% else %}
+    <div>Login to send Message</div>
+    {% endif %}
+  </div>
+  <div>
+    <h3>Participants In this room,</h3>
+    {% for x in participants %}
+    <p>@{{x.username}}</p>
+    {% endfor %}
+    <hr />
+  </div>
+</div>
+{% endblock content %}

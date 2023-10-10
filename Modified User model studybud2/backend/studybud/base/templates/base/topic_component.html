@@ -1,0 +1,36 @@
+<div class="topics">
+  <div class="topics__header">
+    <h2>Browse Topics</h2>
+  </div>
+  <ul class="topics__list">
+    <li>
+      <a href="{% url 'home'%}" class="active">All <span>{{topics.count}}</span></a>
+    </li>
+    {% for x in topics %}
+    <li>
+      <!-- in the below x.room.count,.all...here we dont need to add the curly braces -->
+      <a href="{% url 'home' %}?q={{x.name}}"> {{x.name}} <span>{{x.room_set.all.count}}</span></a>
+    </li>
+    {%endfor%}
+    
+  </ul>
+  <!-- here below i have said that if clicked on more then direct to the topics page..which when rendered will trigger its respective associated view  -->
+  <a class="btn btn--link" href="{% url 'topics' %}">
+    More
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+    >
+      <title>chevron-down</title>
+      <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+    </svg>
+  </a>
+</div>
+
+
+
+
+  
