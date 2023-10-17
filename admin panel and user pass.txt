@@ -1,0 +1,23 @@
+//also the email id wale sare "modifiedusermodel studybud2 ka hain"
+//sadhe wale id ie without email wale  woh "normal study ubdke hain"
+
+admin panel-hardikmaind/hardikmaind@gmail.com
+pass--sRS.6wJ@mwik6L
+
+users
+id-todd
+pass--sRS.6wJ@mwik6L
+
+id-hardikmaind@gmail.com
+pass--sRS.6wJ@mwik6L
+
+id-tim@gmail.com
+pass-KM+hiM2.?i.!hB'
+
+id-erik
+pass--sRS.6wJ@mwik6L
+
+//i think this is of the customeusermodel which i have created seperatly in another folder
+this is also the admin
+id-hardik3
+pass--sRS.6wJ@mwik6L
