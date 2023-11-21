@@ -10,3 +10,25 @@ here customusermodel and the studybud has the same virtual env...son dont need t
  django-admin startproject customusermodel=> toi make the project folder
 
 python manage.py  startapp base=> this is how we create the  app base in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this is a test message for github
